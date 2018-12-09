@@ -5,7 +5,7 @@ my blog
 主要分以下几类：
 * [逻辑学](https://github.com/sundaym/Blog/projects/10)
 * [DataBase](https://github.com/sundaym/Blog/projects/9)
-* [HTML](https://github.com/sundaym/Blog/projects/8)
+* [Front End](https://github.com/sundaym/Blog/projects/8)
 * [Linux](https://github.com/sundaym/Blog/projects/7)
 * [Algorithms](https://github.com/sundaym/Blog/projects/6)
 * [C](https://github.com/sundaym/Blog/projects/5)
