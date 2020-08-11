@@ -1,0 +1,24 @@
+* JS对象创建
+#+BEGIN_SRC js
+// 一个function就相当于一个类
+function user() {
+    this.name='John';
+    this.age=26;
+    var email = "xxx@gmail.com";
+    this.getEmail = function() {
+        return email;
+    }
+}
+
+var u = new user();
+#+END_SRC
+
+#+BEGIN_SRC js
+var person = {
+    name: 'yfc',
+    age: 26
+};
+
+// 访问person对象中的属性
+alert(person.name + " " + person['age'])
+#+END_SRC
