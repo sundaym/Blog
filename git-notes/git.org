@@ -1,0 +1,41 @@
+* Git
+** git常用命令清单
+1. git init, 当前目录新建一个git仓库
+2. git clone [url], 下载一个项目
+3. git add [file1] [file2]..., 添加文件到缓存区(版本控制)
+4. git commit -m "xxx", 提交到当前分支
+5. git branch, 列出所有本地分支
+6. git branch -r, 列出所有远程分支
+7. git branch [branch-name], 新建分支
+8. git checkout -b [branch], 切换分支
+9. git merge [branch], 合并分支到当前分支
+10. git branch -d [branch], 删除分支
+11. git cherry-pick [commit], 选择一个commit合并到当前分支
+12. git push, 同步合并到远程分支
+12. git pull, 根据远程分支更新本地分支
+13. git rebase
+** Git多平台换行符问题(LF/CRLF)
+不同系统上的文本文件使用不同的换行符
+Unix/Linux/Mac上使用0x0A(LF) \n
+Windows上使用0x0D0A(CRLF) \r\n
+
+不同操作系统在使用git commit/push和git clone项目时会导致换行符发生变化
+- git config --global core.autocrlf true    // 提交时转换为lf，检出时转换为crlf
+- git config --global core.autocrlf input   // 提交时转换为lf，检出时不转换
+- git config --global core.autocrlf false   // 提交检出均不转换
+若IDEA已经配置了换行符为LF，则使用第3种配置
+** git设置和取消代理
+- http代理
+git config --global http.proxy "http://127.0.0.1:8080"
+git config --global https.proxy "http://127.0.0.1:8080"
+- socks5代理
+git config --global http.proxy "socks5://127.0.0.1:1081"
+git config --global https.proxy "socks5://127.0.0.1:1081"
+- 或者直接修改用户主目录下的.gitconfig文件
+[http]
+proxy=socks5://127.0.0.1:1081
+[https]
+proxy=socks5://127.0.0.1:1081
+- 取消代理
+git config --global --unset http.proxy
+git config --global --unset https.proxy
