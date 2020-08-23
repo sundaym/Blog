@@ -1,0 +1,8 @@
+* primitive type
+Java变量基础类型8种:
+byte, int, long, char, float, double, boolean
+** byte
+在Java中byte和C中的signed char类型一样, 8位,1个字节, -128~127,
+但是char是16位, 2个字节, '\u0000'-'\uFFFF'(即0~65635)
+通常在读取非文本文件时(图片,声音,可执行文件), 需要用字节数组来保存文件的内容。
+在下载文时，也是用byte数组做临时缓冲接受文件内容。
