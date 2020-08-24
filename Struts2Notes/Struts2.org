@@ -1,0 +1,142 @@
+* Struts2
+** Struts2框架的依赖
+#+BEGIN_SRC xml
+<dependency>
+    <groupId>org.apache.struts</groupId>
+    <artifactId>struts2-core</artifactId>
+    <version>2.3.24</version>
+</dependency>
+
+#+END_SRC
+** web.xml配置
+在web.xml中配置struts2的核心过滤器,启动struts2框架
+#+BEGIN_SRC xml
+<filter>
+    <filter-name>struts2</filter-name>
+    <filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPreparAndExecteFilter</filter-class>
+</filter>
+
+<filter-mapping>
+    <filter-name>struts2</filter-name>
+    <url-pattern>*.action</url-pattern>
+</filter-mapping>
+
+
+#+END_SRC
+
+配置struts2的核心配置文件struts.xml
+#+BEGIN_SRC xml
+
+
+#+END_SRC
+
+** 创建Action类并配置
+#+BEGIN_SRC java
+// 标准写法继承ActionSupport类
+public class HelloAction extends ActionSupport {
+    @Override
+    public String execute() throws Exception {
+        return super.execute();
+    }
+}
+
+#+END_SRC
+
+#+BEGIN_SRC java
+public class UserAction extends ActionSupport {
+
+    private static final long serialVersionUID = 1L;
+
+    private List<User> users; // 查询出来的用户集合
+    // 处理用户查询列表
+    public String list() {
+        users = new ArrayList<>(); // 自己造的假数据
+        for (int i=0; i<10; i++) {
+            User user = new User();
+            user.setId(i);
+            user.setName("abc"+i);
+            user.setAge(20+i);
+            users.add(user);
+        }
+        return "success";
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+}
+
+#+END_SRC
+Action类写好后需要配置在核心配置文件struts.xml中
+默认执行父类的execute()方法, 加method属性执行list方法, result配置结果集
+#+BEGIN_SRC xml
+<struts>
+    <package name="default" namespace="/" extends="struts-default">
+        <action name="userList" class="com.webapp.action.UserAction" method="list">
+            <result name="success">/userList.jsp</result> <!--默认是转发的形式，转发到userList.jsp页面 -->
+        </action>
+    </package>
+</struts>
+
+#+END_SRC
+
+** struts2的执行流程
+请求-->核心过滤器StrutsPrepareAndExecuteFilter
+核心过滤器根据请求地址和struts.xml配置文件将请求分发到对应的Action类中
+Action将结果集返回给核心过滤器
+
+** struts实现数据和视图分离
+*** 改造Action
+#+BEGIN_SRC java
+public class UserAction extends ActionSupport {
+    private String result = "success"; // 在值栈中
+    public String list() {
+        //...
+        return result;
+    }
+    public void setResult(String result) {
+        result = result;
+    }
+}
+
+#+END_SRC
+请求来自第三方需要编写拦截器
+#+BEGIN_SRC java
+public class ThirdInterceptor extends AbstractInterceptor {
+    // 拦截用户请求块，若果请求是第三方，就需要改变result的值
+    @Overrride
+    public String intercept(ActionInvocation invocation) throws Exception {
+        // 获取请求参数集合
+        Map<String, Object> parameters = invocation.getInvocationContext().getParameters();
+        // 第三方get请求中有带参数
+        if (parameters.get("third") != null) {
+            invocation.getStack().setValue("result", "json");
+        }
+        // 调用下一步
+        return invocation.invoke;
+    }
+}
+
+#+END_SRC
+
+拦截器分局部配置和全局配置
+#+BEGIN_SRC xml
+<!-- 局部配置陪在package节点下-->
+<package name="default" namespace="/" extends="json-default">
+    <interceptors>
+        <interceptor name="thirdInterceptor" class="com.xxx.ThirdInterceptor">
+    </interceptors>
+    <action name="userList" class="com.xxx.action.UserAction" method="list">
+        <!-- 引入拦截器-->
+        <interceptor-ref name="defaultStack"></interceptor-ref> <!-- 默认拦截器还得经过-->
+        <interceptor-ref name="thirdInterceptor"></interceptor-ref> <!--同时经过自定义拦截器-->
+        <result name="success">
+            /userList.jsp
+        </result>
+        <result name="json" type="json">
+            <param name="root">users</param>
+        </result>
+    </action>
+</package>
+
+#+END_SRC
