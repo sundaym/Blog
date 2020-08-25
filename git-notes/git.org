@@ -27,10 +27,10 @@ Windows上使用0x0D0A(CRLF) \r\n
 ** git设置和取消代理
 - http代理
 git config --global http.proxy "http://127.0.0.1:8080"
-git config --global https.proxy "http://127.0.0.1:8080"
+git config --global https.proxy http://127.0.0.1:8080
 - socks5代理
-git config --global http.proxy "socks5://127.0.0.1:1081"
-git config --global https.proxy "socks5://127.0.0.1:1081"
+git config --global http.proxy socks5://127.0.0.1:1081
+git config --global https.proxy socks5://127.0.0.1:1081
 - 或者直接修改用户主目录下的.gitconfig文件
 [http]
 proxy=socks5://127.0.0.1:1081
