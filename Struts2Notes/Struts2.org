@@ -139,3 +139,12 @@ public class ThirdInterceptor extends AbstractInterceptor {
 </package>
 
 #+END_SRC
+
+** 访问Action的方式
+1. method属性
+实现Action中不同方法的调用，特点避免动态方法调用的安全隐患，导致大量的Action配置
+2. 动态方法调用
+减少Action数量，使用actionName!methodName.action
+struts.xml将常量struts.enable.DynamicMethodInvocation设置为true
+2.5之后的版本需要开启白名单
+
