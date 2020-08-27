@@ -1,0 +1,57 @@
+* Java IO
+目标：掌握Java IO相关的类的基本用法，再另外学习NIO.
+简介：Java IO包含了所有操作输入，输出需要的类，所有类代表了输入源和输出目标.
+** Java IO分类
+Java IO：字节流 字符流
+- 字节流
+InputStream, OutputStream
+- 字符流
+Reader, Writer
+** 字节流 字符流
+InputStream类是所有Java IO输入流的基类.
+OutputStream类是所有Java IO输出流的基类.
+Reader/Writer与InputStream/OutputStream非常相似，但是基于字符的。
+** IO异常处理
+使用流后需要正确的关闭，都是通过调用close()方法完成的。
+#+BEGIN_SRC java
+InputStream input = new FileInputStream("D:\\out.txt");
+int data = input.read();
+while (data != -1) {
+    doSomeThings(data);
+}
+input.close();
+#+END_SRC
+如果doSomeThings方法中抛出异常，input.close()将得不到执行，InputStream永远不会关闭。
+为了避免这种情况，可以把关闭流的代码放在finally块中确保一定被执行。
+#+BEGIN_SRC java
+InputStream input = null;
+try {
+    input = new FileInputStream("D:\\out.txt");
+    int data = input.read();
+    while (data != -1) {
+        doSomeThings(data);
+    }
+} catch (IOException e) {
+    // ...
+} finally {
+    try {
+        if (input != null) {
+            input.close();
+        }
+    } catch (IOException e) {
+        // ...
+    }
+}
+
+#+END_SRC
+
+Java 7之后版本可使用try-with-resources
+#+BEGIN_SRC java
+try(FileInputStream in = new FileInputStream("D:\\file.txt")) {
+    int data = in.read();
+    while(data != -1) {
+        //...
+    }
+}
+
+#+END_SRC
