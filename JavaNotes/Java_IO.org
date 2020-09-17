@@ -39,3 +39,120 @@ output.close();
 
 
 #+END_SRC
+*** Java IO正确关闭流，不实用JDK7之后的语法
+#+BEGIN_SRC java
+// 要在finally中关闭流
+OutputStream out = null;
+try {
+    out = new OutputStream("");
+    // out.close(); 在这里关闭流会出现错误
+    // ...
+} catch (Exception e) {
+    e.printStackTrace();
+} finally {
+    try {
+        if (out != null) {
+            out.close();
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+
+#+END_SRC
+
+#+BEGIN_SRC java
+// 在关闭多个流时不能将所有流放到一个try中
+OutputStream out0 = null;
+OutputStream out1 = null;
+try {
+    out0 = new FileOutputStream("");
+    out1 = new FileOutputStream("");
+        // ...操作流代码
+} catch (Exception e) {
+    e.printStackTrace();
+} finally {
+    try {
+        if (out != null) {
+        out0.close();// 如果此处出现异常，则out2流没有被关闭
+        }
+        if (out2 != null) {
+        out1.close();
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
+
+#+END_SRC
+
+#+BEGIN_SRC java
+OutputStream out = null;
+OutputStream out2 = null;
+try {
+        out = new FileOutputStream("");
+        out2 = new FileOutputStream("");
+        // ...操作流代码
+} catch (Exception e) {
+        e.printStackTrace();
+} finally {
+        try {
+                if (out != null) {
+                        out.close();// 如果此处出现异常，则out2流也会被关闭
+                }
+        } catch (Exception e) {
+                e.printStackTrace();
+        }
+        try {
+                if (out2 != null) {
+                        out2.close();
+                }
+        } catch (Exception e) {
+                e.printStackTrace();
+        }
+}
+
+#+END_SRC
+
+在循环中创建流，在循环外关闭，导致关闭的是最后一个流
+#+BEGIN_SRC java
+OutputStream out = null;
+try {
+        for (int i = 0; i < 10; i++) {
+                out = new FileOutputStream("");
+                // ...操作流代码
+        }
+} catch (Exception e) {
+        e.printStackTrace();
+} finally {
+        try {
+                if (out != null) {
+                        out.close();
+                }
+        } catch (Exception e) {
+                e.printStackTrace();
+        }
+}
+
+#+END_SRC
+#+BEGIN_SRC java
+// 正确写法
+for (int i = 0; i < 10; i++) {
+        OutputStream out = null;
+        try {
+                out = new FileOutputStream("");
+                // ...操作流代码
+        } catch (Exception e) {
+                e.printStackTrace();
+        } finally {
+                try {
+                        if (out != null) {
+                                out.close();
+                        }
+                } catch (Exception e) {
+                        e.printStackTrace();
+                }
+        }
+}
+
+#+END_SRC
