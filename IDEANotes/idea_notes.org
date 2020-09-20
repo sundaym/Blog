@@ -1,0 +1,13 @@
+* IDEA个人使用设置
+** IDEA Java自定义代码模版
+1.Settings-->Editor-->Live Templates
+2.新建Template Group "MyTemplates"
+3.在"MyTemplates"中添加Live Template
+4.对指定代码模版选择环境，define applicable contexts
+5.自定义的变量需要Edit variables
+| Abbreviation | Template text                                                                    |
+|--------------+----------------------------------------------------------------------------------|
+| lgi          | log.info("$END$");                                                               |
+| lge          | log.error("$END$");                                                              |
+| logger       | private static final Logger logger = LoggerFactory.getLogger($className$.class); |
+|              |                                                                                  |
