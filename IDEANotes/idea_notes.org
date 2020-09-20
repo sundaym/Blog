@@ -7,7 +7,7 @@
 5.自定义的变量需要Edit variables
 | Abbreviation | Template text                                                                    |
 |--------------+----------------------------------------------------------------------------------|
-| lgi          | log.info("$END$");                                                               |
-| lge          | log.error("$END$");                                                              |
+| lgi          | logger.info("$END$");                                                            |
+| lge          | logger.error("$END$");                                                           |
 | logger       | private static final Logger logger = LoggerFactory.getLogger($className$.class); |
 |              |                                                                                  |
