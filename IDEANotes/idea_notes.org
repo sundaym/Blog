@@ -9,6 +9,6 @@
 |--------------+----------------------------------------------------------------------------------|
 | lgi          | logger.info("$END$");                                                            |
 | lge          | logger.error("$END$");                                                           |
-| log          | private static final Logger logger = LoggerFactory.getLogger($className$.class); |
-|              |                                                                                  |
+| lg           | private static final Logger logger = LoggerFactory.getLogger($className$.class); |
+| prs          | private String $END$;                                                            |
 |              |                                                                                  |
