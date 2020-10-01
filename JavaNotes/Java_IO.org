@@ -156,3 +156,17 @@ for (int i = 0; i < 10; i++) {
 }
 
 #+END_SRC
+** JDK7之后的NIO
+JDK7对NIO做了升级(NIO2)
+NIO2中的Path可以看成是对File类的升级
+#+BEGIN_SRC java
+// 以前的IO操作
+File file = new File("index.xml");
+
+// JDK7中
+Path path = Paths.get("index.xml");
+
+// File和Path互相转换
+File file = path.toFile();
+Path newPath = file.toPath();
+#+END_SRC
