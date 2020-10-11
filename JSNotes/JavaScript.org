@@ -1,5 +1,38 @@
 * JavaScript Notes
+** 数据类型
+ECMAScript有5中简单数据类型:Undefined,Null,Boolean,Number,String
+1种复杂的数据类型:Object
+function在ES中算是对象而不是一种数据类型,因为function有一些特殊属性,所以typeof操作符会区分function和object
+#+BEGIN_SRC js
+// js创建object实例的方式
+var person = new Object();
+var person1 = {}; // 和new Object()相同
+var person2 = {name: 'Tom', age:29};//对象字面量表示法
 
+//js访问对象属性方式
+alert(person['name']);
+alert(person.name);
+#+END_SRC
+*** Array类型
+#+BEGIN_SRC js
+// 创建数组方式
+var colors = new Array(); //使用Array构造函数创建
+var colors1 = []; //使用数组字面量表示法
+#+END_SRC
+*** Function类型
+函数是对象，因此函数名也是一个指向函数对象的指针,不会与某个函数绑定
+#+BEGIN_SRC js
+// JS函数定义
+function sum(num1, num2) {
+    return num1 + num2;
+}
+// 和上面的定义方式一样
+var sum1 = function(num1, num2) {
+    return num1 + num2;
+};
+// 不推荐, 使用Function构造函数定义
+var sum2 = new Function("num1", "num2", "return num1+num2");// 最后一个参数表示函数体
+#+END_SRC
 ** ajax请求不能用于下载文件
 ajax返回值的类型是json, text, html, xml，即ajax接受的类型只能是String字符串，不是流类型，所以无法实现文件下载。
 但用ajax可以获得文件的内容，该文件的内容被保存在内存中，无法将文件保存到磁盘。
