@@ -1,0 +1,13 @@
+* Spring JdbcTemplate
+** Spring 3.0.5
+*** JdbcTemplate常用的几种操作
+#+BEGIN_SRC java
+/*******update(String sql, Object... args)*********/
+// delete
+String sql1 = "DELETE FROM customers WHERE customer_name=?";
+jdbcTemplate.update(sql1, "Tom");
+// insert
+String sql2 = "INSERT INTO customers (customers_name, create_time) VALUES (?,?)";
+jdbcTemplate.update(sql2, "", System.currentTimeMillis());
+
+#+END_SRC
