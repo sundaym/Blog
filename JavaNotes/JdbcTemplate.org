@@ -9,5 +9,15 @@ jdbcTemplate.update(sql1, "Tom");
 // insert
 String sql2 = "INSERT INTO customers (customers_name, create_time) VALUES (?,?)";
 jdbcTemplate.update(sql2, "", System.currentTimeMillis());
+// query
+String sql3 = "SELECT customer_id, customer_name, customer_age FROM customer";
+RowMapper<Customer> rowMapper = new BeanPropertyRowMapper<>(Customer.class);
+List<Customer> customer = jdbcTemplate.query(sql3, rowMapper);
 
+String sql4 = "SELECT DISTINCT customer_age FROM customer WHERE customer_age=?";
+List<String> ageList = jdbcTemplate.queryForList(sql4, String.class, "28");
 #+END_SRC
+jdbcTemplate的queryForObject在查不到数据时会抛出EmptyResultDataAccessException异常，
+但结果集大于1时就会抛出IncorrectResultSizeDataAccessException异常，保证记录只有1条
+处理方法：如果想返回null可以捕获异常，并返回null。
+或者该用queryForList方法。
