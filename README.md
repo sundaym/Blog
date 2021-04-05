@@ -5,7 +5,7 @@ my blog
 主要分以下几类：
 * [DataBase](https://github.com/sundaym/Blog/projects/9)
 * [Front End](https://github.com/sundaym/Blog/projects/8)
-* [POSIX相关](https://github.com/sundaym/Blog/projects/7)
+* [Linux相关](https://github.com/sundaym/Blog/projects/7)
 * [Algorithms](https://github.com/sundaym/Blog/projects/6)
 * [C](https://github.com/sundaym/Blog/projects/5)
 * [OOP Design Pattern](https://github.com/sundaym/Blog/projects/4)
