@@ -1,0 +1,16 @@
+### join
+```javascript
+var arr = [
+    '<div>',
+    '  <select>',
+    '    <option value=""></option>',
+    '    <option value="2022">2022</option>',
+    '    <option value="2023">2023</option>',
+    '  </select>',
+    '</div>'
+];
+
+var htmlText = arr.join('');
+$('#id_xx').html(htmlText);
+```
+
