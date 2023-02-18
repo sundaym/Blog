@@ -1,0 +1,103 @@
+## JS模块化
+1. 对象方式
+```javascript
+var moduleA = {
+    count: 0,
+    f1: function () {
+        // ...
+    },
+    
+    f2: function () {
+        //...
+    }
+};
+```
+缺点: 对外暴露了所有成员，可以被调用者访问和修改
+```javascript
+// client
+console.log(moduleA.count); // read
+moduleA.count = 10; // modify
+```
+2. 立即执行函数
+```javascript
+// 可以保证模块的成员私有，无法被外部访问和修改
+var moduleB = (function () {
+    var count = 0;
+    var f1 = function () {
+        // ...
+    };
+    var f2 = function () {
+        
+    };
+    
+    return {
+        f1: f1,
+        f2: f2
+    };
+})();
+```
+3. 放大模式
+```javascript
+// 当一个功能模块很大，需要拆分时
+var moduleB = (function () {
+    var count = 0;
+    var f1 = function () {
+        // ...
+    };
+    var f2 = function () {
+
+    };
+
+    return {
+        f1: f1,
+        f2: f2
+    };
+})();
+
+// 为moduleB添加一个方法
+var moduleB = (function (mod) {
+    mod.f3 = function () {
+        // ..
+    };
+    return mod;
+})(moduleB);
+```
+4. 宽放大模式
+```javascript
+/**
+ * 浏览器中，模块各个部分分为好几个script文件，需要对放大模式进行改进
+ * 否则一个html页面中，加载的多个script可能找不到对象，产生NPE，
+ * 同时，可以多个人在不同的js文件中，开发一个模块
+**/
+
+// developer1 开发 <script src="script1.js"></script>
+var moduleC = (function (mod) {
+    // ..
+    return mod;
+})(window.moduleC || {});
+
+// developer2 开发 <script src="script2.js"></script>
+var moduleC = (function (mod) {
+    // ..
+    return mod;
+})(window.moduleC || {});
+```
+- Examples
+
+在xxx.html页面中引入模块moduleC的全部功能
+```html
+<!-- xxx.html -->
+<head>
+    <script src="script1.js"></script>
+    <script src="script2.js"></script>
+</head>
+<!-- ... -->
+```
+在yyy.html页面引入moduleC的部分功能
+```html
+<!-- yyy.html -->
+<head>
+    <script src="script1.js"></script>
+</head>
+<!-- ... -->
+```
