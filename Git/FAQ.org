@@ -1,0 +1,8 @@
+* FAQ
+** 使用Command Line进行操作
+A: Git还原文件的操作
+Q: 1.文件已修改，但没有通过add添加到暂存区
+#+BEGIN_SRC shell
+git checkout
+
+#+END_SRC
