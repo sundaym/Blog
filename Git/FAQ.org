@@ -3,6 +3,7 @@
 A: Git还原文件的操作
 
 Q: 分三种情况
+
 1.文件已修改，但没有通过add添加到暂存区
 #+BEGIN_SRC shell
 git checkout 文件  # 还原指定文件
