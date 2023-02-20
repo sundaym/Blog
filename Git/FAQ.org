@@ -1,8 +1,21 @@
 * FAQ
 ** 使用Command Line进行操作
 A: Git还原文件的操作
-Q: 1.文件已修改，但没有通过add添加到暂存区
-#+BEGIN_SRC shell
-git checkout
 
+Q: 分三种情况
+1.文件已修改，但没有通过add添加到暂存区
+#+BEGIN_SRC shell
+git checkout 文件  # 还原指定文件
+git chenckout . #还原所有文件
+#+END_SRC
+2.文件已修改，进行了git add，但没有git commit
+#+BEGIN_SRC shell
+git reset HEAD # 回退到当前版本
+git checkout xx.html # 还原xx.html
+git checkout HEAD . # 还原所有文件
+#+END_SRC
+3.文件已修改，并且已git commit
+#+BEGIN_SRC shell
+git reset HEAD^ # 回退到上一个版本
+git checkout xx.html
 #+END_SRC
