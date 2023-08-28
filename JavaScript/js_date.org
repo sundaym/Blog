@@ -1,0 +1,15 @@
+** Create JS Date instance
+JS Date月份用的是索引不是实际对应的月份数字
+#+BEGIN_SRC JavaScript
+  var date1 = new Date(); // current date
+  var date2 = new Date(2023, 0, 1); // 2023-01-01
+  var date3 = new Date('2023-01-01') // 2023-01-01
+  var date4 = new Date(2023, 7, 21, 10, 30, 0); // 2023-08-21 10:30:00
+  var date5 = new Date('October 13, 2023 11:30:00');
+#+END_SRC
+
+** set Date
+#+BEGIN_SRC JavaScript
+  var date = new Date();
+  date.setFullYear(2023, 7, 21); // 2023-07-21
+#+END_SRC

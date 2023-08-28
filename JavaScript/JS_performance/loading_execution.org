@@ -1,1 +1,8 @@
 ** Loading & Execution
+1. Keep in mind that browsers don't start rendering anything on the page until the opening <body> tag is encountered.
+2. Putting script at the top of the page in this way typically leads to a noticeable delay.
+3. Each file must wait until the previous one has been downloaded and executed before the next download can begin.
+4. JS downloads still block downloading of other resources, such as images.
+5. It's recommended to place all <script> tags as close to the bottom of the <body> tag as possible so as not to affect the download of the entire page.
+
+**
