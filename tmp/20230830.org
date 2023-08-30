@@ -1,0 +1,29 @@
+** bat重定向符
+1. > 是覆盖
+2. >> 是在文件后面追加
+
+** JVM
+在Windows中一个java.exe就是一个JVM，每个JVM之间是互相隔离的。
+测试，写两个java类
+#+BEGIN_SRC Java
+  public class T1 {
+      public static void main(String[] args) throws Exception {
+              while (true) {
+                  System.out.println("1");
+                  Thread.sleep(10000);
+              }
+          }
+  }
+#+END_SRC
+
+#+BEGIN_SRC Java
+  public class T2 {
+      public static void main(String[] args) throws Exception {
+              while (true) {
+                  System.out.println("1");
+                  Thread.sleep(10000);
+              }
+          }
+  }
+#+END_SRC
+执行T1的main方法和T2的main方法，可以在任务管理器中看到产生了两个新的java.exe进程。
