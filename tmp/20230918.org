@@ -1,0 +1,23 @@
+** Windows JVM Memory Leak排查命令
+1. 查找Java的PID
+
+在任务管理其中查看java进程ID 或 cmd中使用JPS命令
+2. 根据PID导出dump文件
+live参数是可选的，如果指定，会进行fullGC,则只转储堆中的活动对象；如果没有指定，则转储堆中的所有对象。
+#+BEGIN_EXAMPLE
+  jmap -dump:format=b,file=D:/jvm_dump/dump1.hprof PID
+  jmap -dump:live,format=b,file=D:/jvm_dump/dump2.hprof PID
+#+END_EXAMPLE
+
+** jmap其他
+显示Java堆信息
+#+BEGIN_EXAMPLE
+  jmap -heap pid
+#+END_EXAMPLE
+显示Java堆中metaspace的类加载器的统计信息
+#+BEGIN_EXAMPLE
+  jmap -clstats pid
+#+END_EXAMPLE
+
+** Eclipse MAT
+导出的dump文件可以使用Eclipse MAT打开分析
