@@ -1,0 +1,11 @@
+** 20230919
+*** PLSQL Developer导入Excel文件数据
+1. 使用Tools-->ODBC Importer导入
+#+BEGIN_EXAMPLE
+  表中的字段如果是date类型，excel对应的列需要分列进行格式化
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+  varchar2类型，如果excel中内容字节超过4000，需要在excel中删去多的内容。
+  使用ODBC Importer的substr进行截取是无效的，substr无法接收long类型的参数。
+#+END_EXAMPLE
