@@ -1,0 +1,5 @@
+** JQuery
+获取html标签中name的值
+#+BEGIN_SRC JavaScript
+  let name = $('#id1').attr('name');
+#+END_SRC
